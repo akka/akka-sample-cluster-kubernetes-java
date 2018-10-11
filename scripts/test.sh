@@ -32,6 +32,8 @@ done
 
 if [ $i -eq 10 ]
 then
-  echo "No 2 MemberUp log events found"
+  echo "No 2 MemberUp log events found:"
+  kubectl logs $POD
+  [ `kubectl logs $POD | grep MemberUp | wc -l` -eq 2 ] && break
   exit -1
 fi
