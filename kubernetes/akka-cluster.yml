@@ -29,7 +29,7 @@ spec:
           protocol: TCP
         # akka-management bootstrap
         # must match up with contact-point-discovery.port-name for bootstrap
-        - name: management
+        - name: akka-mgmt-http
           containerPort: 8558
           protocol: TCP
 #namespace
