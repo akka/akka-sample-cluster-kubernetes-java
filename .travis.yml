@@ -25,7 +25,7 @@ before_script:
   - unset _JAVA_OPTIONS
 
 script:
-  - script: ./scripts/setup-minikube-for-linux.sh && ./scripts/test.sh
+  - ./scripts/setup-minikube-for-linux.sh && ./scripts/test.sh
 
 env:
   global:
