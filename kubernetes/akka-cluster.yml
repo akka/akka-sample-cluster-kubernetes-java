@@ -19,6 +19,10 @@ spec:
       - name: appka
         image: bootstrap-demo-kubernetes-api:1.3.3.7
         imagePullPolicy: Never
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
         livenessProbe:
           tcpSocket:
             port: 8558
