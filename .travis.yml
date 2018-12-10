@@ -26,5 +26,5 @@ script:
 
 env:
   global:
-    - TRAVIS_JDK=1.8.181
+    - TRAVIS_JDK=1.8.192
     - JABBA_HOME=/home/travis/.jabba
