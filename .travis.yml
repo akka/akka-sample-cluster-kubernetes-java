@@ -2,9 +2,6 @@ sudo: required
 dist: xenial
 language: scala
 
-jdk:
-  - oraclejdk8
-
 before_install:
   - curl -sL https://raw.githubusercontent.com/shyiko/jabba/0.10.1/install.sh | bash && . ~/.jabba/jabba.sh
 
@@ -29,5 +26,5 @@ script:
 
 env:
   global:
-    - TRAVIS_JDK=1.8.181
+    - TRAVIS_JDK=1.8.192
     - JABBA_HOME=/home/travis/.jabba
