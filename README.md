@@ -14,9 +14,9 @@ Cluster.
 
 ## Starting
 
-First, package the application and make it available as a docker image:
+First, package the application and make it available locally as a docker image:
 
-    sbt docker:publishLocal
+    mvn clean package docker:build
 
 Then akka-cluster.yml should be sufficient to deploy a 2-node Akka Cluster:
 
