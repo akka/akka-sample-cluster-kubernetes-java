@@ -30,10 +30,20 @@ do
   sleep 3
 done
 
+kubectl get pods
+
+echo "Logs"
+echo "=============================="
+for POD in $(kubectl get pods | grep appka | awk '{ print $1 }')
+do
+  echo "Logging for $POD"
+  kubectl logs $POD
+done
+
 if [ $i -eq 10 ]
 then
-  echo "No 2 MemberUp log events found:"
-  kubectl logs $POD
-  [ `kubectl logs $POD | grep MemberUp | wc -l` -eq 2 ] && break
+  echo "No 2 MemberUp log events found"
+  echo "=============================="
+
   exit -1
 fi
