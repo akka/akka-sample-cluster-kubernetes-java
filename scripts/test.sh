@@ -34,7 +34,7 @@ kubectl get pods
 
 echo "Logs"
 echo "=============================="
-for POD in $(kubectl get pods | grep appka | grep Running | awk '{ print $1 }')
+for POD in $(kubectl get pods | grep appka | awk '{ print $1 }')
 do
   echo "Logging for $POD"
   kubectl logs $POD
