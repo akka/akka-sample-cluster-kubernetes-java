@@ -1,4 +1,4 @@
-apiVersion: extensions/v1
+apiVersion: extensions/v1beta2
 kind: Deployment
 metadata:
   labels:
