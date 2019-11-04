@@ -18,30 +18,36 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <encoding>UTF-8</encoding>
-    <akka.version>2.5.22</akka.version>
-    <akka-management.version>1.0.0</akka-management.version>
-    <scala.compat.version>2.12</scala.compat.version>
+    <akka.version>2.6.0-RC2</akka.version>
+    <akka-management.version>1.0.3</akka-management.version>
+    <akka-http.version>10.1.10</akka-http.version>
+    <scala.compat.version>2.13</scala.compat.version>
   </properties>
 
   <dependencies>
     <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-http_2.13</artifactId>
+        <version>${akka-http.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-slf4j_2.12</artifactId>
+      <artifactId>akka-cluster-typed_2.13</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-cluster_2.12</artifactId>
+      <artifactId>akka-slf4j_2.13</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-stream_2.12</artifactId>
+      <artifactId>akka-stream-typed_2.13</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-discovery_2.12</artifactId>
+      <artifactId>akka-discovery_2.13</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
