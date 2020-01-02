@@ -4,6 +4,9 @@ set -exu
 
 mvn clean package docker:build
 
+export KUBECONFIG=~/.kube/config
+kubectl config set-context docker-desktop
+
 kubectl apply -f kubernetes/appka-ns.json
 kubectl config set-context --current --namespace=appka-1
 kubectl apply -f kubernetes/akka-cluster.yml
