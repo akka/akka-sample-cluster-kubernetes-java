@@ -4,6 +4,7 @@ metadata:
   labels:
     app: appka
   name: appka
+  namespace: appka-1
 spec:
   replicas: 2
   selector:
@@ -35,6 +36,9 @@ spec:
             - name: management
               containerPort: 8558
               protocol: TCP
+            - name: http
+              containerPort: 8080
+              protocol: TCP
           #namespace
           env:
             - name: NAMESPACE
@@ -48,6 +52,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: pod-reader
+  namespace: appka-1
 rules:
   - apiGroups: [""] # "" indicates the core API group
     resources: ["pods"]
@@ -57,11 +62,12 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: read-pods
+  namespace: appka-1
 subjects:
   # Note the `name` line below. The first default refers to the namespace. The second refers to the service account name.
   # For instance, `name: system:serviceaccount:myns:default` would refer to the default service account in namespace `myns`
   - kind: User
-    name: system:serviceaccount:default:default
+    name: system:serviceaccount:appka-1:default
 roleRef:
   kind: Role
   name: pod-reader
