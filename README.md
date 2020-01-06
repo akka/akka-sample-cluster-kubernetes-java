@@ -15,17 +15,15 @@ Cluster.
 ## Kubernetes Instructions
     
 ### Docker Desktop for Kubernetes
+For Windows and Mac users, may be handier to use a Kubernetes cluster on [Docker-Desktop](https://www.docker.com/products/docker-desktop).
 If you use Kubernetes on Docker Desktop, after turning it on, you should first issue:
 
-    cd akka-sample-cluster-kubernetes-java/kubernetes
-    
     export KUBECONFIG=~/.kube/config
     kubectl config set-context docker-desktop
     
-A script does all this is `scripts/test_docker_desktop.sh`. To run it, do:
+A script that comprises all steps involved is `scripts/test_docker_desktop.sh`. To run it, do:
 
     cd akka-sample-cluster-kubernetes-java
-    chmod +x scripts/test*
     scripts/test_docker_desktop.sh
 
 ### Minikube
