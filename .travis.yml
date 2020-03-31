@@ -2,6 +2,11 @@ sudo: required
 dist: xenial
 language: java
 
+addons:
+  apt:
+    packages:
+    - conntrack
+
 before_install:
   - curl -sL https://raw.githubusercontent.com/shyiko/jabba/0.10.1/install.sh | bash && . ~/.jabba/jabba.sh
 
