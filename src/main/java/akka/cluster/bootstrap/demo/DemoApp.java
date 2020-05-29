@@ -3,20 +3,18 @@
  */
 package akka.cluster.bootstrap.demo;
 
-import akka.actor.Props;
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.javadsl.Adapter;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.cluster.ClusterEvent;
 import akka.cluster.typed.Cluster;
-import akka.cluster.typed.ClusterCommand;
 import akka.cluster.typed.Subscribe;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.server.AllDirectives;
-import akka.management.scaladsl.AkkaManagement;
 import akka.management.cluster.bootstrap.ClusterBootstrap;
+import akka.management.scaladsl.AkkaManagement;
 import akka.stream.Materializer;
 
 public class DemoApp extends AllDirectives {
@@ -38,9 +36,7 @@ public class DemoApp extends AllDirectives {
 
       cluster.subscriptions().tell(new Subscribe<>(listener, ClusterEvent.MemberEvent.class));
 
-      //#start-akka-management
       AkkaManagement.get(classicSystem).start();
-      //#start-akka-management
       ClusterBootstrap.get(classicSystem).start();
 
       return Behaviors.empty();

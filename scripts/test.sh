@@ -4,7 +4,7 @@ set -exu
 
 mvn clean package docker:build
 
-kubectl apply -f kubernetes/appka-ns.json
+kubectl apply -f kubernetes/namespace.json
 kubectl config set-context --current --namespace=appka-1
 kubectl apply -f kubernetes/akka-cluster.yml
 kubectl expose deployment appka --type=LoadBalancer --name=appka-service
