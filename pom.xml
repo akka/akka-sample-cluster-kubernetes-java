@@ -21,44 +21,44 @@
     <akka.version>2.6.5</akka.version>
     <akka-management.version>1.0.7</akka-management.version>
     <akka-http.version>10.1.12</akka-http.version>
-    <scala.compat.version>2.13</scala.compat.version>
+    <scala.binary.version>2.13</scala.binary.version>
     <version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
   </properties>
 
   <dependencies>
     <dependency>
         <groupId>com.typesafe.akka</groupId>
-        <artifactId>akka-http_${scala.compat.version}</artifactId>
+        <artifactId>akka-http_${scala.binary.version}</artifactId>
         <version>${akka-http.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-http-spray-json_${scala.compat.version}</artifactId>
+      <artifactId>akka-http-spray-json_${scala.binary.version}</artifactId>
       <version>${akka-http.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-cluster-typed_${scala.compat.version}</artifactId>
+      <artifactId>akka-cluster-typed_${scala.binary.version}</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-cluster-sharding-typed_${scala.compat.version}</artifactId>
+      <artifactId>akka-cluster-sharding-typed_${scala.binary.version}</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-slf4j_${scala.compat.version}</artifactId>
+      <artifactId>akka-slf4j_${scala.binary.version}</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-stream-typed_${scala.compat.version}</artifactId>
+      <artifactId>akka-stream-typed_${scala.binary.version}</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
-      <artifactId>akka-discovery_${scala.compat.version}</artifactId>
+      <artifactId>akka-discovery_${scala.binary.version}</artifactId>
       <version>${akka.version}</version>
     </dependency>
     <dependency>
@@ -68,17 +68,17 @@
     </dependency>
     <dependency>
       <groupId>com.lightbend.akka.management</groupId>
-      <artifactId>akka-management-cluster-bootstrap_${scala.compat.version}</artifactId>
+      <artifactId>akka-management-cluster-bootstrap_${scala.binary.version}</artifactId>
       <version>${akka-management.version}</version>
     </dependency>
     <dependency>
       <groupId>com.lightbend.akka.discovery</groupId>
-      <artifactId>akka-discovery-kubernetes-api_${scala.compat.version}</artifactId>
+      <artifactId>akka-discovery-kubernetes-api_${scala.binary.version}</artifactId>
       <version>${akka-management.version}</version>
     </dependency>
     <dependency>
       <groupId>com.lightbend.akka.management</groupId>
-      <artifactId>akka-management-cluster-http_${scala.compat.version}</artifactId>
+      <artifactId>akka-management-cluster-http_${scala.binary.version}</artifactId>
       <version>${akka-management.version}</version>
     </dependency>
   </dependencies>
