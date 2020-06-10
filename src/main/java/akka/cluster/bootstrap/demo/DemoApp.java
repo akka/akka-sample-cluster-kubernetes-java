@@ -5,6 +5,7 @@ package akka.cluster.bootstrap.demo;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.ActorSystem;
+import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.Adapter;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.cluster.ClusterEvent;
@@ -12,40 +13,61 @@ import akka.cluster.typed.Cluster;
 import akka.cluster.typed.Subscribe;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
-import akka.http.javadsl.server.AllDirectives;
+import static akka.http.javadsl.server.Directives.*;
 import akka.management.cluster.bootstrap.ClusterBootstrap;
 import akka.management.scaladsl.AkkaManagement;
 import akka.stream.Materializer;
 
-public class DemoApp extends AllDirectives {
+public class DemoApp {
 
-  DemoApp() {
+  static class MemberEventLogger {
+    public static Behavior<ClusterEvent.MemberEvent> create() {
+      return Behaviors.setup(context -> {
+        Cluster cluster = Cluster.get(context.getSystem());
 
-    ActorSystem.create(Behaviors.setup(context -> {
-      akka.actor.ActorSystem classicSystem = Adapter.toClassic(context.getSystem());
-      Cluster cluster = Cluster.get(context.getSystem());
-      context.getLog().info("Started [" + context.getSystem() + "], cluster.selfAddress = " + cluster.selfMember().address() + ")");
-      Materializer mat = Materializer.matFromSystem(classicSystem);
+        context.getLog().info("Started [{}], cluster.selfAddress = {})",
+                context.getSystem(),
+                cluster.selfMember().address());
 
-      Http.get(classicSystem).bindAndHandle(complete("Hello world").flow(classicSystem, mat), ConnectHttp.toHost("0.0.0.0", 8080), mat);
+        cluster.subscriptions().tell(new Subscribe<>(context.getSelf(), ClusterEvent.MemberEvent.class));
 
-      ActorRef<ClusterEvent.MemberEvent> listener = context.spawn(Behaviors.receiveMessage(event -> {
-         context.getLog().info("MemberEvent: {}", event);
-        return Behaviors.same();
-      }), "listener");
+        return Behaviors.receiveMessage(event -> {
+          context.getLog().info("MemberEvent: {}", event);
+          return Behaviors.same();
+        });
+      });
+    }
+  }
 
-      cluster.subscriptions().tell(new Subscribe<>(listener, ClusterEvent.MemberEvent.class));
+  static class Guardian {
+    public static Behavior<Void> create() {
+      return Behaviors.setup(context -> {
+        final akka.actor.ActorSystem classicSystem = Adapter.toClassic(context.getSystem());
+        Materializer mat = Materializer.matFromSystem(classicSystem);
 
-      AkkaManagement.get(classicSystem).start();
-      ClusterBootstrap.get(classicSystem).start();
+        Http.get(classicSystem).bindAndHandle(complete("Hello world")
+                .flow(classicSystem, mat), ConnectHttp.toHost("0.0.0.0", 8080), mat)
+                .whenComplete((binding, failure) -> {
+                  if (failure == null) {
+                    classicSystem.log().info("HTTP server now listening at port 8080");
+                  } else {
+                    classicSystem.log().error(failure, "Failed to bind HTTP server, terminating.");
+                    classicSystem.terminate();
+                  }
+                });
 
-      return Behaviors.empty();
-    }), "Appka");
+        context.spawn(MemberEventLogger.create(), "listener");
+
+        AkkaManagement.get(classicSystem).start();
+        ClusterBootstrap.get(classicSystem).start();
+
+        return Behaviors.empty();
+      });
+    }
   }
 
   public static void main(String[] args) {
-    new DemoApp();
+    ActorSystem.create(Guardian.create(), "Appka");
   }
 
 }
-
