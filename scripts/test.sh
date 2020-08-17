@@ -2,6 +2,7 @@
 
 set -exu
 
+eval $(minikube -p minikube docker-env)
 mvn clean package docker:build
 
 kubectl apply -f kubernetes/namespace.json
