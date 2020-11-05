@@ -22,7 +22,7 @@
     <akka-management.version>1.0.7</akka-management.version>
     <akka-http.version>10.1.12</akka-http.version>
     <scala.binary.version>2.13</scala.binary.version>
-    <version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
+    <version.number>${git.commit.time}-${git.commit.id.abbrev}</version.number>
   </properties>
 
   <dependencies>
@@ -87,7 +87,7 @@
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.27.2</version>
+        <version>0.34.1</version>
         <configuration>
           <images>
             <image>
@@ -125,7 +125,7 @@
       <plugin>
           <groupId>pl.project13.maven</groupId>
           <artifactId>git-commit-id-plugin</artifactId>
-          <version>2.2.6</version>
+          <version>4.0.0</version>
           <executions>
               <execution>
                   <phase>validate</phase>
