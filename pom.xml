@@ -103,7 +103,12 @@
                   <port>8558</port>
                 </ports>
                 <entryPoint>
-                  java $JAVA_OPTS -cp '/maven/*' akka.cluster.bootstrap.demo.DemoApp
+                    <exec>
+                        <arg>java</arg>
+                        <arg>-cp</arg>
+                        <arg>/maven/*</arg>
+                        <arg>akka.cluster.bootstrap.demo.DemoApp</arg>
+                    </exec>
                 </entryPoint>
                 <assembly>
                   <descriptorRef>artifact-with-dependencies</descriptorRef>
